@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"      
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title> 
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg10.jpg);}
+           
+        </style>
+    </h:head>
+    <h:body styleClass="Bimage"><h:form id="MyForm">
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                    #{titleController.pageTitle} - Edit Plant &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Home" action="index.xhtml" />
+                   &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Log out" action="#{loginManagedBean.logout()}" />
+                </div>
+            </div>
+            
+                <table class="table table-bordered ">
+
+                    <tr>
+                        <td width ="150" valign="top">Id:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "Id" >#{plantController.plant.pid}</h:outputLabel>    
+                        </td>
+                    </tr>
+                <tr>
+                        <td width ="100" valign="top">Name: </td>
+                        <td valign="bottom">
+                            <h:inputText id = "name" value="#{plantController.plant.name}" binding="#{name}" required="true"
+                                         requiredMessage="Please enter a name. "></h:inputText>    
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">Color: </td>
+                        <td valign="bottom">
+                            <h:inputText id = "color" value="#{plantController.plant.color}" binding="#{color}" required="true"
+                                         requiredMessage="Please enter a color. "></h:inputText>    
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">Temperature:</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "temperature" value="#{plantController.plant.temperature}" binding="#{temperature}" required="true"
+                                         converterMessage="Please enter a number"
+                                                 requiredMessage="Please enter a temperature. "></h:inputText>    
+                        </td>
+                    </tr>
+                </table>
+                <h:commandButton id="save" value="Save" action="#{plantManagedBean.updatePlant(plantController.plant)}"  class="btn btn-primary" >
+                    <f:param name="plantid" value="#{plantController.plantIndex + 1}"/>
+                </h:commandButton>
+                <h:commandButton id="Close" value="Close" action="c_plants.xhtml" class="btn btn-primary" >
+                    <f:param name="plantid" value="#{plantController.plantIndex + 1}"/>
+                </h:commandButton>
+                
+        </div></h:form>
+    </h:body>
+</html>

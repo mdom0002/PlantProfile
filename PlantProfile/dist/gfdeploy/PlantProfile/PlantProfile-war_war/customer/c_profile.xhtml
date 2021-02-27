@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title>
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg2.jpg);}
+           
+        </style>
+    </h:head> 
+    <h:body styleClass="Bimage" style="color:black">
+        <h:form id="MyForm">
+        <div class="container">
+        <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                   #{titleController.pageTitle} - My Details &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Home" action="index.xhtml" />
+                   &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Log out" action="#{loginManagedBean.logout()}" />
+            </div> 
+            </div> 
+            <ui:repeat id="Myrepeat" value="#{userApplication.users}"  var="user" varStatus="status"> 
+                      <h:panelGroup rendered="#{user.contact eq request.remoteUser}">
+            
+                <table class="table table-bordered table-striped">
+                  
+                    <tr>
+                        <td width ="150" valign="top">Id:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "uid" >#{user.userId}</h:outputLabel>   
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">FirstName:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "fname" >#{user.firstName}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    
+                     <tr>
+                        <td width ="100" valign="top">LastName:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "lname" >#{user.lastName}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">Contact (login username):</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "contact" >#{user.contact}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Password:</td>
+                        
+                        <td valign="bottom">
+                            
+                            <h:outputLabel id = "password" >********</h:outputLabel>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Email:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "email" >#{user.email}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Street Number:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "streetNumber" >#{user.address.streetNumber}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Street Address:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "streetAddress" >#{user.address.streetAddress}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Suburb:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "suburb" >#{user.address.suburb}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Postcode:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "postcode" >#{user.address.postcode}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">State:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "state" >#{user.address.state}</h:outputLabel>    
+                        </td>
+                    </tr>
+                    
+                   
+                </table>
+            
+                        <h:commandButton value="Update My Profile" action="c_update.xhtml" disabled="#{userApplication.users.get(status.index).userId == null}">
+                                    
+                                    <f:param name="userIndex" value="#{status.index +1}"></f:param> 
+                                </h:commandButton> &nbsp;
+                    
+      </h:panelGroup></ui:repeat>
+                    </div>
+            </h:form> 
+        
+        </h:body>
+    </html>
+

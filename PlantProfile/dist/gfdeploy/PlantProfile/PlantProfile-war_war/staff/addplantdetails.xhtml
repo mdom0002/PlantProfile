@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title> 
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg12.jpg);}
+           
+        </style>
+    </h:head>
+    <h:body styleClass="Bimage"><h:form>
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                    #{titleController.pageTitle} - Add Plant Details &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Home" action="index.xhtml" />
+                   &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Log out" action="#{loginManagedBean.logout()}" />
+                </div>
+            </div>
+            <div>
+            <f:view>
+            
+                <h1><h:outputText value="New Detail"/></h1>
+                <table class="table table-bordered ">
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Height" for="height" />
+                        </td>
+                        <td>
+                            <h:inputText id="height" value="#{allplantd.height}" title="height"
+                                         converterMessage="Please enter a number"/>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Location present" for="price" />
+                        </td>
+                        <td>
+                            <h:inputText id="location" value="#{allplantd.location}" title="price"
+                                         converterMessage="Please enter a number"/>
+                        </td>
+                         
+        
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Stock" for="stock" />
+                        </td>
+                        <td>
+                            <h:inputText id="stock" value="#{allplantd.stock}" title="stock"
+                                         converterMessage="Please enter a number"/>
+                        </td>
+                         
+        
+                    </tr>
+                </table>
+                
+                 
+                <h:commandButton id="submit" value="Submit" action="#{addPlantDetails.addPlantDetails(allplantd,plantController.plant.pid,request.remoteUser)}" class="btn btn-primary">
+                <f:param name="plantid" value="#{plantController.plantIndex}" />
+                    <f:param name="plantid" value="#{plantDetailsController.plantIndex}" />
+                    
+                   
+                </h:commandButton>
+                <h:commandButton id="close" value=" Close" action="home.xhtml" class="btn btn-primary" />
+                    
+            
+
+        </f:view>
+            </div>
+        </div>
+        </h:form> 
+    </h:body>
+</html>

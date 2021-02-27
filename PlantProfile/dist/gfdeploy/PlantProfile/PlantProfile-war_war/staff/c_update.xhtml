@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"      
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title> 
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg13.jpg);}
+           
+        </style>
+    </h:head>
+    <h:body styleClass="Bimage" style="color:black"><h:form id ="MyForm" >
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                    #{titleController.pageTitle} - Edit Customer &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Home" action="index.xhtml" />
+                   &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Log out" action="#{loginManagedBean.logout()}" />
+                </div>
+            </div>
+            
+                <table class="table table-bordered ">
+
+                    <tr>
+                        <td width ="150" valign="top">Id:</td>
+                        
+                        <td valign="bottom">
+                            <h:outputLabel id = "uid" >#{userController.user.userId}</h:outputLabel>    
+                        </td>
+                    </tr>
+                <tr>
+                        <td width ="100" valign="top">FirstName:</td>
+                        <td valign="bottom">
+                            <h:inputText id = "fname" value="#{userController.user.firstName}" binding="#{fname}" required="true"
+                                         requiredMessage="Please enter firstname. "></h:inputText>    
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">LastName:</td>
+                        <td valign="bottom">
+                            <h:inputText id = "lname" value="#{userController.user.lastName}" binding="#{lname}" required="true"
+                                         requiredMessage="Please enter lastname. " ></h:inputText>    
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td width ="100" valign="top">Contact (login username):</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "contact" value="#{userController.user.contact}" binding="#{contact}" required="true"
+                                         validatorMessage="Please enter a valid contact starting with 0 and have 10 digits in total eg:0498765432"
+                                                 requiredMessage="Please enter contact ">
+                            <f:validateRegex pattern = "[0]\d{9}" /></h:inputText>    
+                        </td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <td width ="100" valign="top">Email:</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "email" value="#{userController.user.email}" binding="#{email}" required="true"
+                                         validatorMessage="Please enter a valid email eg:customer@gmail.com"
+                                                 requiredMessage="Please enter email ">
+                                <f:validateRegex pattern = "[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+" /></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Street Number:</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "streetNumber" value="#{userController.user.address.streetNumber}" binding="#{streetNumber}" required="true"
+                                         validatorMessage="Please enter a valid number"
+                                          converterMessage="Please enter a number"
+                                          requiredMessage="Please enter street number "/>   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Street Address:</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "streetAddress" value="#{userController.user.address.streetAddress}" binding="#{streetAddress}" required="true"
+                             requiredMessage="Please enter street address "></h:inputText>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Suburb:</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "suburb" value="#{userController.user.address.suburb}" binding="#{suburb}" required="true"
+                                        requiredMessage="Please enter suburb "></h:inputText>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">Postcode:</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "postcode" value="#{userController.user.address.postcode}" binding="#{postcode}" required="true"
+                                         validatorMessage="Please enter a valid number"
+                                          converterMessage="Please enter a number"
+                                                 requiredMessage="Please enter postcode "/>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width ="100" valign="top">State:</td>
+                        
+                        <td valign="bottom">
+                            <h:inputText id = "state" value="#{userController.user.address.state}" binding="#{state}" required="true"
+                                          requiredMessage="Please enter state "></h:inputText>    
+                        </td>
+                    </tr>
+                    
+                </table>
+                <h:commandButton id="save" value="Save" action="#{userManagedBean.updateUser(userController.user)}" class="btn btn-primary" >
+                    <f:param name="userIndex" value="#{userController.userIndex + 1}"/>
+                </h:commandButton>
+                <h:commandButton id="Close" value="Close" action="customer_list.xhtml" class="btn btn-primary" >
+                    <f:param name="userIndex" value="#{userController.userIndex + 1}"/>
+                </h:commandButton>
+        </div>    </h:form>
+        
+    </h:body>
+</html>

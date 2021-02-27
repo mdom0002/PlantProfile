@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title>
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg11.jpg);}
+           
+        </style>
+    </h:head> 
+    <h:body styleClass="Bimage" style="color:black">
+        <h:form id="MyForm">
+        <div class="container">
+        <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                   #{titleController.pageTitle} - Plant  List &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Home" action="index.xhtml" />
+                   &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Log out" action="#{loginManagedBean.logout()}" />
+            </div> 
+            </div>  
+            <div>
+                 <h:commandButton id="viewAll" value="View All Plants" action="#{searchPlant.searchAll()}" class="btn btn-primary" >
+                        <f:param name="plantid" value="#{status.index + 1}"/>
+                 </h:commandButton> &nbsp;
+                <h:inputText value="#{searchPlant.searchById}" id="searchById" onchange="if (document.getElementById('MyForm:searchById').value.trim() == '') {document.getElementById('MyForm:searchById').value = 0;} "  /> 
+                    <h:commandButton id="searchId" value="Search by Id" action="#{searchPlant.findPlantByPid(searchPlant.searchById)}" class="btn btn-primary" >
+                        <f:param name="plantid" value="#{status.index + 1}"/>
+                    </h:commandButton>
+            
+            &nbsp; &nbsp;  
+            <h:inputText value="#{searchPlant.searchByColor}" id="searchByColor" />      
+            <h:commandButton id="searchColor" value="Search by Color" action="#{searchPlant.searchPlantByColor(searchPlant.searchByColor)}" class="btn btn-primary" >
+                        <f:param name="plantid" value="#{status.index + 1}"/>
+                    </h:commandButton>
+            <br></br><br></br>
+            <h:outputLabel id="min" value="Minimum height"  />
+            <h:inputText value="#{searchPlant.searchByHeightMin}" id="searchByHeightMin" required="true" onchange="if (document.getElementById('MyForm:searchByHeightMin').value.trim() == '') {document.getElementById('MyForm:searchByHeightMin').value = 0.0;} " />
+            &nbsp;
+            <h:outputLabel id="max" value="Maximum height"  />
+            <h:inputText value="#{searchPlant.searchByHeightMax}" id="searchByHeightMax" required="true" onchange="if (document.getElementById('MyForm:searchByHeightMax').value.trim() == '') {document.getElementById('MyForm:searchByHeightMax').value = 0.0;} " />
+            &nbsp;       
+            <h:commandButton id="searchHeight" value="Search by Height" action="#{searchPlant.searchPlantByHeight(searchPlant.searchByHeightMin,searchPlant.searchByHeightMax)}" class="btn btn-primary" >
+                        <f:param name="plantid" value="#{status.index + 1}"/>
+                    </h:commandButton> 
+            
+           
+             
+            </div>
+            <br></br>
+                <table class="table table-bordered table-striped">
+                    
+                    <tr>
+                            <td> 
+                                <h:outputLabel id="Id" value="Id"  />
+                            </td>
+                            <td> 
+                                <h:outputLabel id="Name" value="Name"/>
+                            </td>
+                        
+                        
+                     </tr>
+                    
+                    <ui:repeat id="Myrepeat" value="#{plantApplication.plants}"  var="plant" varStatus="status"> 
+                        <tr>
+                            <td>
+                                <h:outputText value="#{plantApplication.plants.get(status.index).pid}" id="plantID" /> 
+                                
+                            </td>
+                            
+                            <td>
+                                <h:outputText id="name" value="#{plant.name}"></h:outputText>
+                            </td>
+                            
+                        <td>
+                            <h:graphicImage library="images" name="#{plantApplication.plants.get(status.index).pid}x.jpg" />
+                        
+                                <h:commandLink value=" View |" action="details.xhtml" disabled="#{plantApplication.plants.get(status.index).pid == null}">
+                                    
+                                    <f:param name="plantid" value="#{status.index + 1}"/>
+                                    
+                                </h:commandLink>
+                         
+                            <h:commandLink value="Update | " action="update.xhtml" disabled="#{plantApplication.plants.get(status.index).pid == null}">
+                                    
+                                    <f:param name="plantid"  value="#{status.index + 1}"></f:param> 
+                                </h:commandLink>
+                            <h:commandLink value="Delete" action="#{plantApplication.removePlant(plantApplication.plants.get(status.index).pid)}" disabled="#{plantApplication.plants.get(status.index).pid == null}">
+                                </h:commandLink>
+                                    
+                        </td>
+                        </tr>
+                    </ui:repeat> 
+            
+                        </table>
+            
+                
+                            
+                            <h:commandButton value="Add Plant" action="addplant.xhtml" class="btn btn-primary" />
+            </div>
+                        </h:form>
+        
+        </h:body>
+    </html>
+

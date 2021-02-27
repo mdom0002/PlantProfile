@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title>
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg.jpg);}
+           
+        </style>
+    </h:head> 
+    <h:body styleClass="Bimage">
+        <h:form id="MyForm">
+        <div class="container">
+        <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                   #{titleController.pageTitle} - Customer  List &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Home" action="index.xhtml" />
+                   &nbsp; &nbsp; &nbsp; &nbsp;
+                   <h:commandLink value="Log out" action="#{loginManagedBean.logout()}" />
+            </div> 
+            </div>  
+            
+                <table class="table table-bordered table-striped">
+                    
+                    <tr>
+                            <td> 
+                                <h:outputLabel id="Id" value="Id"  />
+                            </td>
+                            <td> 
+                                <h:outputLabel id="fname" value="FirstName"/>
+                            </td>
+                        <td> 
+                                <h:outputLabel id="lname" value="LastName"/>
+                            </td>
+                        
+                     </tr>
+                    
+                    <ui:repeat id="Myrepeat" value="#{userApplication.users}"  var="user" varStatus="status"> 
+                        <h:panelGroup rendered="#{user.userType eq 'customer'}">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{user.userId}" id="uid" /> 
+                                
+                            </td>
+                            
+                            <td>
+                                <h:outputText id="fname" value="#{user.firstName}"></h:outputText>
+                            </td>
+                            <td>
+                                <h:outputText id="lname" value="#{user.lastName}"></h:outputText>
+                            </td>
+                            
+                        <td>
+                        
+                                <h:commandLink value=" View |" action="c_details.xhtml" disabled="#{userApplication.users.get(status.index).userId == null}">
+                                    
+                                    <f:param name="userIndex" value="#{status.index + 1}"/>
+                                    
+                                </h:commandLink>
+                            
+                            <h:commandLink value="Update | " action="c_update.xhtml" disabled="#{userApplication.users.get(status.index).userId == null}">
+                                    
+                                    <f:param name="userIndex"  value="#{status.index + 1}"></f:param> 
+                                </h:commandLink>
+                            <h:commandLink value="Delete" action="#{userApplication.removeUser(userApplication.users.get(status.index).userId)}" disabled="#{userApplication.users.get(status.index).userId == null}">
+                                </h:commandLink>
+                                    
+                        </td>
+                        </tr>
+                        </h:panelGroup>
+                    </ui:repeat> 
+            
+                        </table>
+                            
+                            <h:commandButton value="Add Customer" action="addcustomer.xhtml" class="btn btn-primary" />
+            </div>
+                        </h:form>
+        
+        </h:body>
+    </html>
+

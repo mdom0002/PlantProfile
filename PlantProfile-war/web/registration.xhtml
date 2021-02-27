@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"      
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
+        <title>#{titleController.pageTitle}</title> 
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg2.jpg);}
+           
+        </style>
+    </h:head>
+    <h:body styleClass="Bimage"><h:form>
+            <div class="container" style="color:black">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                    #{titleController.pageTitle} - New Customer Registration 
+                </div>
+            </div>
+            <div>
+            <f:view>
+            
+                <h1><h:outputText value="New Customer"/></h1>
+                <table class="table table-bordered ">
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter FirstName" for="fName" />
+                        </td>
+                        <td>
+                            <h:inputText id="fName" value="#{alluser.firstName}" title="fName" required="true"
+                                         requiredMessage="Please enter firstname. "/>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter LastName" for="lName" />
+                        </td>
+                        <td>
+                            <h:inputText id="lName" value="#{alluser.lastName}" title="lName" required="true"
+                                         requiredMessage="Please enter lastname. "/>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter Contact (login username)" for="contact" />
+                        </td>
+                        <td>
+                            <h:inputText id="contact" value="#{alluser.contact}" title="contact" required="true"
+                                         validatorMessage="Please enter a valid contact starting with 0 and have 10 digits in total eg:0498765432"
+                                                 requiredMessage="Please enter contact ">
+                                <f:validateRegex pattern = "[0]\d{9}" /></h:inputText>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter password" for="password" />
+                        </td>
+                        <td>
+                            <h:inputSecret id="password" redisplay="true" required="true" value="#{alluser.password}" title="password" 
+                                requiredMessage="Please enter password " />
+                            
+                        </td>
+                    
+                    </tr>
+                    
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter email" for="email" />
+                        </td>
+                        <td>
+                            <h:inputText id="email" value="#{alluser.email}" title="email" required="true"
+                                         validatorMessage="Please enter a valid email eg:customer@gmail.com"
+                                                 requiredMessage="Please enter email ">
+                                <f:validateRegex pattern = "[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+" /></h:inputText>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter StreetNumber" for="sNumber" />
+                        </td>
+                        <td>
+                            <h:inputText id="sNumber" value="#{alluser.streetNumber}" title="sNumber" required="true"
+                                         validatorMessage="Please enter a valid number"
+                                          converterMessage="Please enter a number"
+                                          requiredMessage="Please enter street number "/>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter StreetAddress" for="sAddress" />
+                        </td>
+                        <td>
+                            <h:inputText id="sAddress" value="#{alluser.streetAddress}" title="sAddress" required="true"
+                              requiredMessage="Please enter street address " />
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter suburb" for="suburb" />
+                        </td>
+                        <td>
+                            <h:inputText id="suburb" value="#{alluser.suburb}" title="suburb" required="true"
+                                        requiredMessage="Please enter suburb " />
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter Postcode" for="postcode" />
+                        </td>
+                        <td>
+                            <h:inputText id="postcode" value="#{alluser.postcode}" title="postcode" required="true"
+                                         validatorMessage="Please enter a valid number"
+                                          converterMessage="Please enter a number"
+                                                 requiredMessage="Please enter postcode "/>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td width ="200">
+                            <h:outputLabel value="Enter State" for="state" />
+                        </td>
+                        <td>
+                            <h:inputText id="state" value="#{alluser.state}" title="state" required="true"
+                                    
+                                                 requiredMessage="Please enter state " />
+                        </td>
+                    
+                    </tr>
+                   
+                </table>
+                <h:commandButton id="submit" value="Submit" action="#{addUser.addUser(alluser,'customer')}" class="btn btn-primary" />
+                &nbsp; &nbsp;
+                <h:commandButton id="close" value=" Close" action="index.xhtml" class="btn btn-primary" />
+                    
+           
+
+        </f:view>
+            </div>
+            </div>
+         </h:form>    
+    </h:body>
+</html>

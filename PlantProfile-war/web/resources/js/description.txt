@@ -1,0 +1,6 @@
+
+Plant profile is a web application which provides a platform for getting information about native plants of Australia along with some other useful features.
+
+                            Only registered users can login with their accounts.
+
+Customers can register and make an account. Then login to the application to use various features. Customers can search for plants using various filters, customers can add plants and their details, customers can also view details of the plant they want to view.

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+         <title>Login !!</title>
+         <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg3.jpg);}
+           
+        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body styleClass="Bimage">
+        <div class="container" style="color:black" align="center"><h:form>
+        <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                   #{titleController.pageTitle}  :   LOGIN PAGE 
+                <h:commandLink />
+            </div> 
+        </div> </h:form> 
+        <h1>User Authentication</h1><br></br> <br></br>
+<form method="POST" action="j_security_check">
+<label for="j_username">Username:</label>
+<input type="text" name="j_username" />
+<br></br> <br></br>
+<label for="j_password">Password:</label>
+<input type="password" name="j_password" />
+<br></br> <br></br>
+
+<input type="submit" value="Submit"/>
+</form></div>
+    </h:body>
+</html>

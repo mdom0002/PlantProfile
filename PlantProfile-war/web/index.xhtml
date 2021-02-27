@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>Welcome !!</title>
+        <style>               
+       .Bimage{background-image:url(#{request.contextPath}/resources/images/bg.jpg);}
+           
+        </style>
+    </h:head>
+    <h:body styleClass="Bimage">
+        <h:form id="MyForm">
+        <div class="container">
+        <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                   #{titleController.pageTitle}   :  WELCOME PAGE
+                <h:commandLink />
+            </div> 
+            </div>  
+            <h1 align="center" style="color:black">Hello there ! Welcome to Plant Profile</h1>
+        <br></br><br></br> <br></br>
+        <div id="desc" style="color:black">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    <h:commandButton class="btn btn-primary" onclick="loadDescription()" value = "GET DESCRIPTION" ></h:commandButton>
+</div>
+
+<script>
+function loadDescription() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+      document.getElementById("desc").innerHTML =
+      this.responseText;
+  };
+  xhttp.open("GET", "resources/js/description.txt", true);
+  xhttp.send();
+}
+</script>
+        <br></br><br></br> <br></br>
+        <div align="center" style="color:black">
+            If you are a customer <h:outputLink value="customer/index.xhtml">****Click here****</h:outputLink> to login to your profile
+       <br></br><br></br> 
+       If you are a staff member <h:outputLink value="staff/index.xhtml">****Click here****</h:outputLink> to login to your profile
+        </div>
+        </div>
+            <br></br> <br></br> <br></br>
+   
+
+
+            
+            
+ <div class="container">
+        <tr>
+            <h:outputLabel style="color:black" value="Hey Customer ! If you haven't signed up then register now by clicking on register button" /> </tr>
+        &nbsp;  
+        <h:commandButton id="register" class="btn btn-primary" value="Register" action="registration.xhtml" />
+        &nbsp; &nbsp; </div>
+                <br></br> <br></br> 
+                <div class="container">
+        <tr>
+            <h:outputLabel style="color:black" value="Hey Staff member ! If you are staff member then register here by clicking on staff register button" /> </tr>
+        &nbsp;  
+        <h:commandButton id="s_register" class="btn btn-primary" value="Staff Register" action="s_registration.xhtml" />
+        &nbsp; &nbsp; </div> </h:form>
+    </h:body>
+</html>
+
+
+<!--html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+         <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <h:form id="MyForm">
+        <div class="container">
+        <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+                   #{titleController.pageTitle} - Login
+                <h:commandLink />
+            </div> 
+            </div>  
+        
+        
+            <table>  
+           
+                <form method="POST" action="j_security_check">
+                    <label for="j_username">Username:</label>
+<input type="text" name="j_username" />
+<label for="j_password">Password:</label>
+<input type="password" name="j_password" />
+    <input type="submit" value="Submit"/>
+                          
+                </form>             
+                    
+                 
+        <div class="form-group">
+                            <h:outputLabel value="Contact:" />
+                            <h:inputText id="contact" value="#{login.contact}"
+                                         requiredMessage="Please enter your contact "/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Password:" />
+                            <h:inputSecret id="password" value="#{login.password}" 
+                                           requiredMessage="Please enter your password"/>
+                        </div>
+                
+                <h:commandButton id="login" class="btn btn-primary" value="Login" action="#{loginManagedBean.login(login.contact,login.password)}" />
+               
+                <div>
+        <tr>
+            <h:outputLabel value="If you haven't signed up then register now by clicking on register button" /> </tr>
+        &nbsp;  
+        <h:commandButton id="register" class="btn btn-primary" value="Register" action="/customer/registration.xhtml" />
+        &nbsp; &nbsp; </div>
+                <br></br> <br></br> 
+                <div>
+        <tr>
+            <h:outputLabel value="If you are staff member then register here by clicking on staff register button" /> </tr>
+        &nbsp;  
+        <h:commandButton id="s_register" class="btn btn-primary" value="Staff Register" action="/staff/s_registration.xhtml" />
+        &nbsp; &nbsp; </div>   
+            </table></div>
+        </h:form>               
+    </h:body>
+        
+</html-->
